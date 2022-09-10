@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { ReposSearchFormValues } from './repos-search-form/repos-search-form.model';
 
 @Component({
   selector: 'app-repos',
@@ -12,4 +13,9 @@ export class ReposComponent implements OnInit {
   ngOnInit(): void {
   }
 
+  searchRepos(formValues: Partial<ReposSearchFormValues>) {
+    console.log(formValues)
+  }
+
+  
 }

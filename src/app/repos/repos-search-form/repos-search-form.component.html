@@ -1,0 +1,15 @@
+<form [formGroup]="reposSearchForm" (ngSubmit)="onSubmit()">
+    <label for="name">Name: </label>
+    <input id="name" type="text" formControlName="name">
+
+    <label for="language">Language: </label>
+    <input id="language" type="text" formControlName="language">
+
+    <label for="stars">Minimum number of stars: </label>
+    <input id="stars" type="number" min="0" formControlName="stars">
+
+    <label for="stars">Text in repo's issues title: </label>
+    <input id="stars" type="number" min="0" formControlName="stars">
+
+    <button type="submit">Cerca</button>
+</form>
