@@ -24,7 +24,8 @@ export class ReposComponent implements OnInit, OnDestroy {
   ngOnInit(): void {
     this.repositoriesSubscription = this.reposService.repositories$.subscribe({
       next: (data: any) => {
-        this.repositories = data.items
+        console.log(data)
+        // this.repositories = data.items
         this.changeDetectorRef.detectChanges()
       }
     })
@@ -37,7 +38,8 @@ export class ReposComponent implements OnInit, OnDestroy {
   }
 
   searchRepos(formValues: Partial<ReposSearchFormValues>) {
-    this.reposService.fetchRepositories(formValues)
+    // this.reposService.fetchRepositories(formValues)
+    this.reposService.fetchRepositoriesByIssueTitleText(formValues)
   }
 
 

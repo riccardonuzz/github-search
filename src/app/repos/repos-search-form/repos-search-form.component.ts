@@ -1,4 +1,4 @@
-import { ChangeDetectionStrategy, ChangeDetectorRef, Component, EventEmitter, OnInit, Output } from '@angular/core';
+import { ChangeDetectionStrategy, Component, EventEmitter, OnInit, Output } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { ReposSearchFormValues } from './repos-search-form.model';
 
@@ -14,23 +14,19 @@ export class ReposSearchFormComponent implements OnInit {
   reposSearchForm = new FormGroup({
     name: new FormControl('', [Validators.required]),
     language: new FormControl(''),
-    stars: new FormControl(0),
+    stars: new FormControl(0, [Validators.min(0)]),
     issueTitle: new FormControl('')
   });
 
 
-  constructor(private changeDetectorRef: ChangeDetectorRef) { }
+  constructor() { }
 
   ngOnInit(): void {
   }
 
   onSubmit() {
-    console.log(this.reposSearchForm.controls)
-    this.changeDetectorRef.detectChanges()
     if (!this.reposSearchForm.invalid) {
       this.submitForm.emit(this.reposSearchForm.value)
-    } else {
-
     }
   }
 
