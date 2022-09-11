@@ -1,15 +1,30 @@
 <form [formGroup]="reposSearchForm" (ngSubmit)="onSubmit()">
-    <label for="name">Name: </label>
-    <input id="name" type="text" formControlName="name">
 
-    <label for="language">Language: </label>
-    <input id="language" type="text" formControlName="language">
+    <div class="row mb-3">
+        <div class="col-md-6">
+            <label for="name" class="form-label">Name</label>
+            <input type="text" class="form-control" id="name" formControlName="name">
+            <div class="text-danger" *ngIf="(reposSearchForm.controls.name.touched && reposSearchForm.controls.name.errors?.['required'])">Name field is required.</div>
+        </div>
+        <div class="col-md-6">
+            <label for="language" class="form-label">Programming language</label>
+            <input type="text" class="form-control" id="language" formControlName="language">
+        </div>
+    </div>
 
-    <label for="stars">Minimum number of stars: </label>
-    <input id="stars" type="number" min="0" formControlName="stars">
+    <div class="row mb-3">
+        <div class="col-md-6">
+            <label for="stars" class="form-label">Minimum number of stars: </label>
+            <input type="number" min="0" class="form-control" id="stars" formControlName="stars">
+        </div>
+        <div class="col-md-6">
+            <label for="issueTitle" class="form-label">Text in repo's issues title: </label>
+            <input type="text" class="form-control" id="issueTitle">
+        </div>
+    </div>
 
-    <label for="stars">Text in repo's issues title: </label>
-    <input id="stars" type="number" min="0" formControlName="stars">
+    <div class="d-flex justify-content-end">
+        <button [disabled]="reposSearchForm.invalid" type="submit" class="btn btn-primary">Cerca</button>
+    </div>
 
-    <button type="submit">Cerca</button>
 </form>

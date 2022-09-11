@@ -4,13 +4,19 @@ import { ReposComponent } from './repos.component';
 import { ReposRoutingModule } from './repos-routing.module';
 import { ReposSearchFormComponent } from './repos-search-form/repos-search-form.component';
 import { ReactiveFormsModule } from '@angular/forms';
+import { ReposService } from './repos.service';
+import { TableComponent } from './table/table.component';
 
 
 
 @NgModule({
   declarations: [
     ReposComponent,
-    ReposSearchFormComponent
+    ReposSearchFormComponent,
+    TableComponent
+  ],
+  providers: [
+    ReposService
   ],
   imports: [
     CommonModule,
