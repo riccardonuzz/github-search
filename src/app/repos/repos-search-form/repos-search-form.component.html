@@ -1,30 +1,51 @@
-<form [formGroup]="reposSearchForm" (ngSubmit)="onSubmit()">
+<div class="row d-flex">
 
-    <div class="row mb-3">
-        <div class="col-md-6">
-            <label for="name" class="form-label">Name</label>
-            <input type="text" class="form-control" id="name" formControlName="name">
-            <div class="text-danger" *ngIf="(reposSearchForm.controls.name.touched && reposSearchForm.controls.name.errors?.['required'])">Name field is required.</div>
-        </div>
-        <div class="col-md-6">
-            <label for="language" class="form-label">Programming language</label>
-            <input type="text" class="form-control" id="language" formControlName="language">
-        </div>
+
+    <div class="col-md-6">
+        <form class="border rounded p-3" [formGroup]="reposSearchForm" (ngSubmit)="onRepoSubmit()">
+
+            <div class="row mb-3">
+                <div class="col-md-12">
+                    <label for="name" class="form-label">Name *</label>
+                    <input placeholder="Examples: Angular, React" type="text" class="form-control" id="name" formControlName="name">
+                    <div class="text-danger" *ngIf="(reposSearchForm.controls.name.touched && reposSearchForm.controls.name.errors?.['required'])">"Name" field is required.</div>
+                </div>
+            </div>
+    
+            <div class="row mb-3">
+                <div class="col-md-6">
+                    <label for="language" class="form-label">Programming language</label>
+                    <input placeholder="Examples: Java, JavaScript, Go" type="text" class="form-control" id="language" formControlName="language">
+                </div>
+                <div class="col-md-6">
+                    <label for="stars" class="form-label">Minimum number of stars: </label>
+                    <input type="number" min="0" class="form-control" id="stars" formControlName="stars">
+                    <div class="text-danger" *ngIf="(reposSearchForm.controls.stars.touched && reposSearchForm.controls.stars.errors?.['min'])">Stars should be at least 0 or greater.</div>
+                </div>
+            </div>
+    
+            <div class="d-flex justify-content-end">
+                <button [disabled]="reposSearchForm.invalid" type="submit" class="btn btn-primary">Cerca</button>
+            </div>
+        </form>
     </div>
 
-    <div class="row mb-3">
-        <div class="col-md-6">
-            <label for="stars" class="form-label">Minimum number of stars: </label>
-            <input type="number" min="0" class="form-control" id="stars" formControlName="stars">
-            <div class="text-danger" *ngIf="(reposSearchForm.controls.stars.touched && reposSearchForm.controls.stars.errors?.['min'])">Stars should be at least 0 or greater.</div>
-        </div>
-        <div class="col-md-6">
-            <label for="issueTitle" class="form-label">Text in repo's issues title: </label>
-            <input type="text" class="form-control" id="issueTitle" formControlName="issueTitle">
-        </div>
-    </div>
 
-    <div class="d-flex justify-content-end">
-        <button [disabled]="reposSearchForm.invalid" type="submit" class="btn btn-primary">Cerca</button>
+    
+    <div class="col-md-6">
+        <form class="w-100 border rounded p-3 h-100 d-flex flex-column justify-content-between" [formGroup]="issueSearchForm" (ngSubmit)="onIssueSearchSubmit()">
+            <div class="row mx-0 mb-3 w-100">
+                <div class="col-md-12 p-0">
+                    <label for="issueTitle" class="form-label">Text in repo's issues title *</label>
+                    <input placeholder="Example: Cannot read properties of undefined" type="text" class="form-control" id="issueTitle" formControlName="issueTitle">
+                    <div class="text-danger" *ngIf="(issueSearchForm.controls.issueTitle.touched && issueSearchForm.controls.issueTitle.errors?.['required'])">"Text in repo's issue title" field is required.</div>
+                </div>
+            </div>
+            <div class="col-md-12 d-flex justify-content-end align-items-end align-self-end">
+                <button [disabled]="issueSearchForm.invalid" type="submit" class="btn btn-primary">Cerca</button>
+            </div>
+        </form>
     </div>
-</form>
+</div>
+
+

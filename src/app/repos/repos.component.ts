@@ -1,6 +1,7 @@
 import { ChangeDetectionStrategy, ChangeDetectorRef, Component, OnDestroy, OnInit } from '@angular/core';
 import { Subscription } from 'rxjs';
-import { ReposSearchFormValues } from './repos-search-form/repos-search-form.model';
+import { IssuesSearchFormValues, ReposSearchFormValues } from './repos-search-form/repos-search-form.model';
+import { RepositororiesSearchResponse } from './repos-search.model';
 import { ReposService } from './repos.service';
 
 @Component({
@@ -11,21 +12,23 @@ import { ReposService } from './repos.service';
 })
 export class ReposComponent implements OnInit, OnDestroy {
   repositoriesSubscription: Subscription | null = null
+  loading: boolean = false
+  searched: boolean = false
   headers: Array<string> = [
     'Nome',
     'Avatar',
     'Data creazione'
   ]
 
-  repositories = []
+  repositories: RepositororiesSearchResponse["items"] = []
 
   constructor(private reposService: ReposService, private changeDetectorRef: ChangeDetectorRef) { }
 
   ngOnInit(): void {
     this.repositoriesSubscription = this.reposService.repositories$.subscribe({
-      next: (data: any) => {
-        console.log(data)
-        // this.repositories = data.items
+      next: (data: RepositororiesSearchResponse["items"]) => {
+        this.repositories = data
+        this.loading = false
         this.changeDetectorRef.detectChanges()
       }
     })
@@ -37,8 +40,19 @@ export class ReposComponent implements OnInit, OnDestroy {
     }
   }
 
+  startLoading() {
+    this.repositories = []
+    this.loading = true
+    this.searched = true
+  }
+
   searchRepos(formValues: Partial<ReposSearchFormValues>) {
-    // this.reposService.fetchRepositories(formValues)
+    this.startLoading()
+    this.reposService.fetchRepositories(formValues)
+  }
+
+  searchReposByIssue(formValues: IssuesSearchFormValues) {
+    this.startLoading()
     this.reposService.fetchRepositoriesByIssueTitleText(formValues)
   }
 

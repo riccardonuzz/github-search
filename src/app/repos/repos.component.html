@@ -1,15 +1,16 @@
 <div>
     <h1 class="mb-4">Search repositories</h1>
-    <app-repos-search-form (submitForm)="searchRepos($event)"></app-repos-search-form>
+    <app-repos-search-form (reposSubmitForm)="searchRepos($event)" (issuesSubmitForm)="searchReposByIssue($event)"></app-repos-search-form>
 
     <div class="table-container mt-5">
         <app-table
             [headers]="headers"
             [rowTemplate]="rowTemplate"
             [data]="repositories"
-        >
-            
+            [loading]="loading"
+        >   
         </app-table>
+        <div *ngIf="!searched">Puoi effettuare una ricerca dei repository utilizzando il form in alto.</div>
     </div>
     
 </div>

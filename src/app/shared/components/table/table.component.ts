@@ -10,6 +10,7 @@ export class TableComponent implements OnInit {
   @Input() headers: Array<string> = []
   @Input() data: Array<Object> = []
   @Input() rowTemplate: TemplateRef<Element> | null = null
+  @Input() loading: boolean = false
 
   constructor() { }
 

@@ -7,7 +7,7 @@
     </tr>
   </thead>
   <tbody>
-      <tr *ngFor="let entry of data">
+      <tr *ngFor="let entry of data" role="button">
           <ng-container
               [ngTemplateOutlet]="rowTemplate"
               [ngTemplateOutletContext]="{ $implicit: entry }"
@@ -16,3 +16,4 @@
       </tr>
   </tbody>
 </table>
+<div *ngIf="loading">Caricamento...</div>

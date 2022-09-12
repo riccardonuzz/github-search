@@ -1,6 +1,6 @@
 import { ChangeDetectionStrategy, Component, EventEmitter, OnInit, Output } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
-import { ReposSearchFormValues } from './repos-search-form.model';
+import { IssuesSearchFormValues, ReposSearchFormValues } from './repos-search-form.model';
 
 @Component({
   selector: 'app-repos-search-form',
@@ -9,13 +9,18 @@ import { ReposSearchFormValues } from './repos-search-form.model';
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class ReposSearchFormComponent implements OnInit {
-  @Output() submitForm = new EventEmitter<Partial<ReposSearchFormValues>>()
+  @Output() reposSubmitForm = new EventEmitter<Partial<ReposSearchFormValues>>()
+  @Output() issuesSubmitForm = new EventEmitter<IssuesSearchFormValues>()
+
 
   reposSearchForm = new FormGroup({
     name: new FormControl('', [Validators.required]),
     language: new FormControl(''),
     stars: new FormControl(0, [Validators.min(0)]),
-    issueTitle: new FormControl('')
+  });
+
+  issueSearchForm = new FormGroup({
+    issueTitle: new FormControl('', [Validators.required])
   });
 
 
@@ -24,9 +29,15 @@ export class ReposSearchFormComponent implements OnInit {
   ngOnInit(): void {
   }
 
-  onSubmit() {
+  onRepoSubmit() {
     if (!this.reposSearchForm.invalid) {
-      this.submitForm.emit(this.reposSearchForm.value)
+      this.reposSubmitForm.emit(this.reposSearchForm.value)
+    }
+  }
+
+  onIssueSearchSubmit() {
+    if (!this.issueSearchForm.invalid) {
+      this.issuesSubmitForm.emit(this.issueSearchForm.value as IssuesSearchFormValues)
     }
   }
 
