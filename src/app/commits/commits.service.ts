@@ -11,10 +11,12 @@ export class CommitsService {
   constructor(private httpClient: HttpClient) { }
 
 
+  /**
+   * @description Fetch commits of a given repository "owner/name"
+   */
   fetchCommits(owner: string, repo: string, formValues: Partial<CommitsSearchFormValues>) {
     const params = new HttpParams()
       .set('q', `${formValues.text} repo:${owner}/${repo}`)
-    // .set('q', this.buildSearchQuery(formValues))
 
     this.httpClient.get<CommitsSearchResponse>('https://api.github.com/search/commits', { params })
       .subscribe({

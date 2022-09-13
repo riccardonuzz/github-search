@@ -47,18 +47,17 @@ export class CommitsComponent implements OnInit {
   }
 
   ngOnDestroy(): void {
-    if (this.commitsSubscription) {
-      this.commitsSubscription.unsubscribe()
-    }
+    this.commitsSubscription && this.commitsSubscription.unsubscribe()
+    this.routeSubscription && this.routeSubscription.unsubscribe()
   }
 
-  startLoading() {
+  startLoading(): void {
     this.commits = []
     this.loading = true
     this.searched = true
   }
 
-  searchCommits(formValues: Partial<CommitsSearchFormValues>) {
+  searchCommits(formValues: Partial<CommitsSearchFormValues>): void {
     this.startLoading()
     this.commitsService.fetchCommits(this.owner, this.repo, formValues)
   }

@@ -15,9 +15,9 @@ export class ReposComponent implements OnInit, OnDestroy {
   loading: boolean = false
   searched: boolean = false
   headers: Array<string> = [
-    'Nome',
+    'Name',
     'Avatar',
-    'Data creazione'
+    'Creation date'
   ]
 
   repositories: RepositororiesSearchResponse["items"] = []
@@ -52,9 +52,9 @@ export class ReposComponent implements OnInit, OnDestroy {
   }
 
   searchReposByIssue(formValues: IssuesSearchFormValues) {
-    this.startLoading()
-    this.reposService.fetchRepositoriesByIssueTitleText(formValues)
+    if (formValues.issueTitle) {
+      this.startLoading()
+      this.reposService.fetchRepositoriesByIssueTitleText(formValues.issueTitle)
+    }
   }
-
-
 }
