@@ -1,7 +1,7 @@
 import { ChangeDetectionStrategy, ChangeDetectorRef, Component, OnDestroy, OnInit } from '@angular/core';
 import { Subscription } from 'rxjs';
 import { IssuesSearchFormValues, ReposSearchFormValues } from './repos-search-form/repos-search-form.model';
-import { RepositororiesSearchResponse } from './repos-search.model';
+import { RepositororiesSearchResponse } from './repos.model';
 import { ReposService } from './repos.service';
 
 @Component({

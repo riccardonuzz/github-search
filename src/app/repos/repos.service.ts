@@ -2,7 +2,7 @@ import { HttpClient, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { concatMap, delay, mergeMap, of, Subject, switchMap, take, timer, toArray } from 'rxjs';
 import { IssuesSearchFormValues, ReposSearchFormValues } from './repos-search-form/repos-search-form.model';
-import { IssuesSearchResponse, RepositororiesSearchResponse } from './repos-search.model';
+import { IssuesSearchResponse, RepositororiesSearchResponse } from './repos.model';
 
 @Injectable()
 export class ReposService {

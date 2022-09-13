@@ -1,12 +1,12 @@
 <div>
-    <h1 class="mb-4">Search repositories</h1>
-    <app-repos-search-form (reposSubmitForm)="searchRepos($event)" (issuesSubmitForm)="searchReposByIssue($event)"></app-repos-search-form>
+    <h1 class="mb-4">Search commits</h1>
+    <!-- <app-repos-search-form (reposSubmitForm)="searchRepos($event)" (issuesSubmitForm)="searchReposByIssue($event)"></app-repos-search-form> -->
 
     <div class="table-container mt-5">
         <app-table
             [headers]="headers"
             [rowTemplate]="rowTemplate"
-            [data]="repositories"
+            [data]="commits"
             [loading]="loading"
         >   
         </app-table>
@@ -17,7 +17,7 @@
 
 
 <ng-template #rowTemplate let-entry>
-    <td [routerLink]="['/commits', entry.owner.login, entry.name]">
+    <td>
         {{entry.full_name}}
     </td>
     <td>

@@ -1,8 +1,11 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import { AppComponent } from './app.component';
 
 const routes: Routes = [
+  {
+    path: 'commits',
+    loadChildren: () => import('./commits/commits.module').then(module => module.CommitsModule)
+  },
   {
     path: 'repos',
     loadChildren: () => import('./repos/repos.module').then(module => module.ReposModule)
