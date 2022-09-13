@@ -58,7 +58,9 @@ export class CommitsComponent implements OnInit {
   }
 
   searchCommits(formValues: Partial<CommitsSearchFormValues>): void {
-    this.startLoading()
-    this.commitsService.fetchCommits(this.owner, this.repo, formValues)
+    if (formValues.text) {
+      this.startLoading()
+      this.commitsService.fetchCommits(this.owner, this.repo, formValues.text)
+    }
   }
 }

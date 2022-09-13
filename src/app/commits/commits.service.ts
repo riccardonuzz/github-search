@@ -14,9 +14,10 @@ export class CommitsService {
   /**
    * @description Fetch commits of a given repository "owner/name"
    */
-  fetchCommits(owner: string, repo: string, formValues: Partial<CommitsSearchFormValues>) {
+  fetchCommits(owner: string, repo: string, text: string = '') {
+    const searchText = text ? `${text} ` : ''
     const params = new HttpParams()
-      .set('q', `${formValues.text} repo:${owner}/${repo}`)
+      .set('q', `${searchText}repo:${owner}/${repo}`)
 
     this.httpClient.get<CommitsSearchResponse>('https://api.github.com/search/commits', { params })
       .subscribe({
