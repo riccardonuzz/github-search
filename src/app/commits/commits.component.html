@@ -1,6 +1,6 @@
 <div>
-    <h1 class="mb-4">Search commits</h1>
-    <!-- <app-repos-search-form (reposSubmitForm)="searchRepos($event)" (issuesSubmitForm)="searchReposByIssue($event)"></app-repos-search-form> -->
+    <h1 class="mb-4">Search {{owner}}/{{repo}} commits </h1>
+    <app-commits-search-form (commitsSubmitForm)="searchCommits($event)"></app-commits-search-form>
 
     <div class="table-container mt-5">
         <app-table
@@ -18,12 +18,12 @@
 
 <ng-template #rowTemplate let-entry>
     <td>
-        {{entry.full_name}}
+        {{entry.commit.author.name}}
     </td>
     <td>
-        <img height="50" [src]="entry.owner.avatar_url" />
+        <a target="_blank" [href]="entry.html_url">See commit page</a>
     </td>
-    <td>
-        {{entry.created_at}}
+    <td class="message-col">
+        {{entry.commit.message}}
     </td>
 </ng-template>

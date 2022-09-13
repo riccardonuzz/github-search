@@ -1,1 +1,22 @@
-<p>commits-search-form works!</p>
+<div class="row d-flex">
+
+
+    <div class="col-md-6">
+        <form class="border rounded p-3" [formGroup]="commitsSearchForm" (ngSubmit)="onCommitsSearchSubmit()">
+
+            <div class="row mb-3">
+                <div class="col-md-12">
+                    <label for="text" class="form-label">Text *</label>
+                    <input placeholder="Examples: Fixed typo" type="text" class="form-control" id="text" formControlName="text">
+                    <div class="text-danger" *ngIf="(commitsSearchForm.controls.text.touched && commitsSearchForm.controls.text.errors?.['required'])">"Text" field is required.</div>
+                </div>
+            </div>
+    
+            <div class="d-flex justify-content-end">
+                <button [disabled]="commitsSearchForm.invalid" type="submit" class="btn btn-primary">Cerca</button>
+            </div>
+        </form>
+    </div>
+</div>
+
+

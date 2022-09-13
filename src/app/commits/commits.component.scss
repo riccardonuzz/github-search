@@ -1,0 +1,11 @@
+.table-container {
+    height: 55vh;
+    overflow-y: auto;
+}
+
+.message-col {
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    max-width: 500px;
+}

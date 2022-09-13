@@ -1,5 +1,7 @@
 import { ChangeDetectorRef, Component, OnInit } from '@angular/core';
+import { ActivatedRoute } from '@angular/router';
 import { Subscription } from 'rxjs';
+import { CommitsSearchFormValues } from './commits-search-form/commits-search.model';
 import { CommitsSearchResponse } from './commits.model';
 import { CommitsService } from './commits.service';
 
@@ -9,7 +11,7 @@ import { CommitsService } from './commits.service';
   styleUrls: ['./commits.component.scss']
 })
 export class CommitsComponent implements OnInit {
-
+  routeSubscription: Subscription | null = null
   commitsSubscription: Subscription | null = null
   loading: boolean = false
   searched: boolean = false
@@ -20,9 +22,21 @@ export class CommitsComponent implements OnInit {
   ]
   commits: CommitsSearchResponse["items"] = []
 
-  constructor(private commitsService: CommitsService, private changeDetectorRef: ChangeDetectorRef) { }
+  owner: string = ''
+  repo: string = ''
+
+  constructor(
+    private commitsService: CommitsService,
+    private changeDetectorRef: ChangeDetectorRef,
+    private activatedRoute: ActivatedRoute
+  ) { }
 
   ngOnInit(): void {
+    this.routeSubscription = this.activatedRoute.params.subscribe(params => {
+      this.owner = params['owner']
+      this.repo = params['repo']
+    })
+
     this.commitsSubscription = this.commitsService.commits$.subscribe({
       next: (data: CommitsSearchResponse["items"]) => {
         this.commits = data
@@ -44,8 +58,8 @@ export class CommitsComponent implements OnInit {
     this.searched = true
   }
 
-  // searchRepos(formValues: Partial<ReposSearchFormValues>) {
-  //   this.startLoading()
-  //   // this.commitsService.fetchCommits(formValues)
-  // }
+  searchCommits(formValues: Partial<CommitsSearchFormValues>) {
+    this.startLoading()
+    this.commitsService.fetchCommits(this.owner, this.repo, formValues)
+  }
 }
