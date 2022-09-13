@@ -4,6 +4,8 @@ import { CommitsComponent } from './commits.component';
 import { CommitsService } from './commits.service';
 import {HttpClientTestingModule} from '@angular/common/http/testing'
 import { RouterTestingModule } from '@angular/router/testing';
+import { SharedModule } from '../shared/shared.module';
+import { CommitsSearchFormComponent } from './commits-search-form/commits-search-form.component';
 
 describe('CommitsComponent', () => {
   let component: CommitsComponent;
@@ -11,10 +13,14 @@ describe('CommitsComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [CommitsComponent],
+      declarations: [
+        CommitsComponent,
+        CommitsSearchFormComponent
+      ],
       imports: [
         HttpClientTestingModule,
-        RouterTestingModule
+        RouterTestingModule,
+        SharedModule
       ],
       providers: [
         CommitsService

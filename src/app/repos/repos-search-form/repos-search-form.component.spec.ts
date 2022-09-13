@@ -1,4 +1,5 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
+import { ReactiveFormsModule } from '@angular/forms';
 
 import { ReposSearchFormComponent } from './repos-search-form.component';
 
@@ -8,9 +9,12 @@ describe('ReposSearchFormComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ ReposSearchFormComponent ]
+      declarations: [ReposSearchFormComponent],
+      imports: [
+        ReactiveFormsModule
+      ]
     })
-    .compileComponents();
+      .compileComponents();
 
     fixture = TestBed.createComponent(ReposSearchFormComponent);
     component = fixture.componentInstance;

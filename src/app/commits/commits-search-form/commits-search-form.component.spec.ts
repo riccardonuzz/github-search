@@ -1,4 +1,5 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
+import { ReactiveFormsModule } from '@angular/forms';
 
 import { CommitsSearchFormComponent } from './commits-search-form.component';
 
@@ -8,7 +9,12 @@ describe('CommitsSearchFormComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ CommitsSearchFormComponent ]
+      declarations: [
+        CommitsSearchFormComponent
+      ],
+      imports: [
+        ReactiveFormsModule
+      ]
     })
     .compileComponents();
 
