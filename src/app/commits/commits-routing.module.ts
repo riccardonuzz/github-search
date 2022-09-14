@@ -6,7 +6,13 @@ const routes: Routes = [
     {
         path: ':owner/:repo',
         component: CommitsComponent
-    }
+    },
+    {
+        path: '',
+        redirectTo: '/repos',
+        pathMatch: 'full',
+    },
+   
 ];
 
 @NgModule({

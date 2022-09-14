@@ -6,11 +6,12 @@ import { ChangeDetectionStrategy, Component, Input, OnInit, TemplateRef } from '
   styleUrls: ['./table.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class TableComponent implements OnInit {
+export class TableComponent<T> implements OnInit {
   @Input() headers: Array<string> = []
-  @Input() data: Array<Object> = []
+  @Input() data: Array<T> | null = []
   @Input() rowTemplate: TemplateRef<Element> | null = null
   @Input() loading: boolean = false
+  @Input() loadingLabel: string = ''
 
   constructor() { }
 

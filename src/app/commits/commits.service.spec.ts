@@ -1,6 +1,6 @@
 import { HttpClientTestingModule, HttpTestingController } from '@angular/common/http/testing';
 import { TestBed } from '@angular/core/testing';
-import { commitsMock } from 'src/test-helpers/commits.mock';
+import { commitsMock } from 'src/test-helpers/mocks/commits.mock';
 
 import { CommitsService } from './commits.service';
 

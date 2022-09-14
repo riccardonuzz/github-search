@@ -1,4 +1,4 @@
-import { ChangeDetectorRef, Component, OnInit } from '@angular/core';
+import { ChangeDetectionStrategy, ChangeDetectorRef, Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { Subscription } from 'rxjs';
 import { CommitsSearchFormValues } from './commits-search-form/commits-search.model';
@@ -8,7 +8,8 @@ import { CommitsService } from './commits.service';
 @Component({
   selector: 'app-commits',
   templateUrl: './commits.component.html',
-  styleUrls: ['./commits.component.scss']
+  styleUrls: ['./commits.component.scss'],
+  changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class CommitsComponent implements OnInit {
   routeSubscription: Subscription | null = null
@@ -20,7 +21,7 @@ export class CommitsComponent implements OnInit {
     'URL',
     'Commit message'
   ]
-  commits: CommitsSearchResponse["items"] = []
+  commits: CommitsSearchResponse["items"] | null = []
 
   owner: string = ''
   repo: string = ''

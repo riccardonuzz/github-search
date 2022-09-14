@@ -10,7 +10,8 @@ const routes: Routes = [
     path: 'repos',
     loadChildren: () => import('./repos/repos.module').then(module => module.ReposModule)
   },
-  { path: '', redirectTo: 'repos', pathMatch: 'full'}
+  { path: '**', redirectTo: 'repos' },
+  { path: '', redirectTo: 'repos', pathMatch: 'full' }
 ]
 
 @NgModule({

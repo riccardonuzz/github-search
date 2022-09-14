@@ -8,9 +8,11 @@
             [rowTemplate]="rowTemplate"
             [data]="repositories"
             [loading]="loading"
+            loadingLabel="Caricamento..."
         >   
         </app-table>
-        <div *ngIf="!searched">Type something on the above form to press the "Search" button to start a research.</div>
+        <div *ngIf="!loading && searched && repositories?.length === 0">No data found.</div>
+        <div *ngIf="repositories === null">Type something on the above form to press the "Search" button to start a research.</div>
     </div>
 </div>
 

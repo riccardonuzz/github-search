@@ -20,7 +20,7 @@ export class ReposComponent implements OnInit, OnDestroy {
     'Creation date'
   ]
 
-  repositories: RepositororiesSearchResponse["items"] = []
+  repositories: RepositororiesSearchResponse["items"] | null = null
 
   constructor(private reposService: ReposService, private changeDetectorRef: ChangeDetectorRef) { }
 

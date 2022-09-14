@@ -1,6 +1,7 @@
 import { HttpClientTestingModule, HttpTestingController } from '@angular/common/http/testing';
-import { TestBed } from '@angular/core/testing';
-import { repositoriesMock } from 'src/test-helpers/repositories.mock';
+import { discardPeriodicTasks, fakeAsync, flush, TestBed, tick } from '@angular/core/testing';
+import { issuesMock, issuesRepositoriesMock } from 'src/test-helpers/mocks/issues.mock';
+import { repositoriesMock } from 'src/test-helpers/mocks/repositories.mock';
 
 import { ReposService } from './repos.service';
 
@@ -23,6 +24,7 @@ describe('ReposService', () => {
     expect(service).toBeTruthy()
   })
 
+
   it('should fetch repositories', () => {
     const formData = {
       name: 'example',
@@ -37,4 +39,38 @@ describe('ReposService', () => {
     expect(req.request.method).toBe("GET");
     req.flush(repositoriesMock);
   })
+
+
+  it('should fetch repositories by issue title', fakeAsync(() => {
+    const issueTitle = 'example issue'
+    service.fetchRepositoriesByIssueTitleText(issueTitle)
+    service.repositories$.subscribe(data => expect(data.length).toBe(3))
+
+    const issuesRequest = mockedHttpClient.expectOne(`https://api.github.com/search/issues?q=example%20issue%20in:title%20type:issue`);
+    expect(issuesRequest.request.method).toBe("GET");
+    issuesRequest.flush(issuesMock);
+
+    const req1 = mockedHttpClient
+      .expectOne(`https://api.github.com/repos/stryker-mutator/stryker-js`)
+    req1.flush(issuesRepositoriesMock[0]);
+
+    tick(200);
+
+    const req2 = mockedHttpClient
+      .expectOne(`https://api.github.com/repos/nagybnc/weather-app`)
+    req2.flush(issuesRepositoriesMock[1]);
+
+    tick(200);
+
+    const req3 = mockedHttpClient
+      .expectOne(`https://api.github.com/repos/elastic/kibana`)
+    req3.flush(issuesRepositoriesMock[2]);
+
+    tick(200);
+
+
+    // discardPeriodicTasks()
+  }))
+
+
 })

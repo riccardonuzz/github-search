@@ -16,8 +16,8 @@ import { CommitsService } from './commits.service';
     CommitsService
   ],
   imports: [
+    CommitsRoutingModule,
     SharedModule,
-    CommitsRoutingModule
   ]
 })
 export class CommitsModule { }

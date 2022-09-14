@@ -3,6 +3,7 @@ import { ReposComponent } from './repos.component';
 import { ReposSearchFormComponent } from './repos-search-form/repos-search-form.component';
 import { ReposService } from './repos.service';
 import { SharedModule } from '../shared/shared.module';
+import { ReposRoutingModule } from './repos-routing.module';
 
 
 
@@ -16,6 +17,7 @@ import { SharedModule } from '../shared/shared.module';
   ],
   imports: [
     SharedModule,
+    ReposRoutingModule
   ]
 })
 export class ReposModule { }

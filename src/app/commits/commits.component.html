@@ -8,8 +8,10 @@
             [rowTemplate]="rowTemplate"
             [data]="commits"
             [loading]="loading"
+            loadingLabel="Caricamento..."
         >   
         </app-table>
+        <div *ngIf="!loading && searched && commits?.length === 0">No data found.</div>
         <div *ngIf="!searched">Type something on the above form to press the "Search" button to start a research.</div>
     </div>
     

@@ -1,11 +1,12 @@
-import { Component, EventEmitter, OnInit, Output } from '@angular/core';
+import { ChangeDetectionStrategy, Component, EventEmitter, OnInit, Output } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { CommitsSearchFormValues } from './commits-search.model';
 
 @Component({
   selector: 'app-commits-search-form',
   templateUrl: './commits-search-form.component.html',
-  styleUrls: ['./commits-search-form.component.scss']
+  styleUrls: ['./commits-search-form.component.scss'],
+  changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class CommitsSearchFormComponent implements OnInit {
   @Output() commitsSubmitForm = new EventEmitter<Partial<CommitsSearchFormValues>>()

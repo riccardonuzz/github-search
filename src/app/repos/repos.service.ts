@@ -40,6 +40,8 @@ export class ReposService {
 
   /**
   * @description Fetch repositories by issue title
+  * As we're not using Search API with an APP TOKEN there's a time limit of 10 requests
+  * per second. This is why there's a delay between subsequent API calls
   */
   fetchRepositoriesByIssueTitleText(issueTitle: string) {
     const params = new HttpParams()
